@@ -15,7 +15,7 @@
           <button @click="navigateTo('/blogs')" class="back-button">กลับหน้าหลัก   </button>
           <div v-if="isUserLoggedIn && isAdmin">
             <button @click="navigateTo('/blog/edit/' + blog.id)" class="edit-button">แก้ไข</button>
-            <button @click="deleteBlog(blog)" class="remove-button">ลบ Blog</button>
+            <button @click="deleteBlog(blog)" class="remove-button">ลบข้อมูล</button>
           </div>
           
         </div>
