@@ -69,7 +69,7 @@
         <input type="text" v-model="blog.status" />
       </p>
       <p>
-        <button type="submit" class="edit-button">create blog</button>
+        <button type="submit" class="edit-button">create toy</button>
       </p>
     </form>
   </div>

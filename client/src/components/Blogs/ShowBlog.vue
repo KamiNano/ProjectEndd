@@ -1,3 +1,5 @@
+<!-- 2.5 -->
+
 <template>
   <div class="show-blog-container">
     <!-- <h1 class="show-blog-title">Show Blog</h1> -->
@@ -13,40 +15,23 @@
           <button @click="navigateTo('/blogs')" class="back-button">กลับหน้าหลัก   </button>
           <div v-if="isUserLoggedIn && isAdmin">
             <button @click="navigateTo('/blog/edit/' + blog.id)" class="edit-button">แก้ไข</button>
-            <button @click="deleteBlog(blog)" class="remove-button">ลบข้อมูล</button>
+            <button @click="deleteBlog(blog)" class="remove-button">ลบ Blog</button>
           </div>
           
         </div>
       </div>
-    </div>
-    <div>
-        <h1>Show Blog</h1>
-        <p>id: {{ blog.id }}</p>
-        <p>title: {{ blog.title }}</p>
-        <!-- ใช้ v-html แทนการใช้ {{ blog.content }} -->
-        <div v-html="blog.content"></div>
-        <p>category: {{ blog.category }}</p>
-        <p>status: {{ blog.status }}</p>
-        <!-- แสดงภาพ thumbnail ถ้ามี -->
-        <div v-if="blog.thumbnail && blog.thumbnail !== 'null' && blog.thumbnail !== ''">
-            <img :src="BASE_URL + blog.thumbnail" alt="Blog Thumbnail" style="max-width: 200px; max-height: 200px;" />
-        </div>
-        <p>
-            <button v-on:click="navigateTo('/blog/edit/'+ blog.id)">แก้ไข blog</button>
-            <button v-on:click="navigateTo('/blogs')">กลับ </button>
-        </p>
-
     </div>
   </div>
 </template>
 
 <script>
 import BlogsService from '@/services/BlogsService';
+
 export default {
   data() {
     return {
       blog: {},
-      BASE_URL: 'http://localhost:8080/assets/uploads/',
+      BASE_URL: 'http://localhost:8081/assets/uploads/',
     };
   },
   async created() {

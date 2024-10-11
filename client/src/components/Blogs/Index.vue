@@ -29,24 +29,12 @@
       <div v-for="blog in blogs" :key="blog.id" class="blog-item">
         <img :src="BASE_URL + blog.thumbnail" alt="Blog Thumbnail" class="thumbnail" />
         <p><strong>Title:</strong> {{ blog.title }}</p>
-        <p><strong>Content:</strong> <span v-html="blog.content"></span></p>
         <p><strong>Category:</strong> {{ blog.category }}</p>
-        <button @click="navigateToBlog(blog.id)">ดูรายละเอียด</button>
+        <button @click="navigateToBlog(blog.id)" class="edit-button">ดูรายละเอียด</button>
       </div>
     </div>
 
     <!-- Product Grid Section -->
-    <div class="product-grid">
-      <div v-for="product in products" :key="product.id" class="product-card">
-        <img :src="product.image ? product.image : 'https://via.placeholder.com/150'" alt="Product Image" class="product-image" />
-        <div class="product-info">
-          <h3 class="product-title">Title: {{ product.title }}</h3>
-          <p class="product-content">Content: {{ product.content }}</p>
-          <p class="product-category">Category: {{ product.category }}</p>
-          <button class="edit-button" @click="editBlog(product.id)">แก้ไข Blog</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -155,29 +143,7 @@ export default {
   background-color: #2558ff; /* สีส้ม */
 }
 </style>
-=======
-      products: []
-    };
-  },
-  created() {
-    this.fetchProducts();
-  },
-  methods: {
-    fetchProducts() {
-      BlogsService.index()
-        .then(response => {
-          this.products = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching products:', error);
-        });
-    },
-    editBlog(blogId) {
-      this.$router.push({ name: 'blog-edit', params: { blogId: blogId } });
-    }
-  }
-};
-</script>
+
 
 <style>
 .product-grid {
@@ -217,7 +183,7 @@ export default {
 }
 
 .edit-button {
-  background-color: #4caf50;
+  background-color: #2558ff;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -227,7 +193,7 @@ export default {
 }
 
 .edit-button:hover {
-  background-color: #45a049;
+  background-color: #003cff;
 }
 </style>
 
