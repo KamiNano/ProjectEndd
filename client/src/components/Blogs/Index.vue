@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="blog-list">
     <div v-for="blog in blogs" :key="blog.id" class="blog-item">
       <img :src="BASE_URL + blog.thumbnail" alt="Blog Thumbnail" class="thumbnail" />
@@ -20,25 +20,65 @@
 
     </div>
   </div>
+</template> -->
+
+<template>
+  <div>
+    <!-- Blog List Section -->
+    <div class="blog-list">
+      <div v-for="blog in blogs" :key="blog.id" class="blog-item">
+        <img :src="BASE_URL + blog.thumbnail" alt="Blog Thumbnail" class="thumbnail" />
+        <p><strong>Title:</strong> {{ blog.title }}</p>
+        <p><strong>Content:</strong> <span v-html="blog.content"></span></p>
+        <p><strong>Category:</strong> {{ blog.category }}</p>
+        <button @click="navigateToBlog(blog.id)">ดูรายละเอียด</button>
+      </div>
+    </div>
+
+    <!-- Product Grid Section -->
+    <div class="product-grid">
+      <div v-for="product in products" :key="product.id" class="product-card">
+        <img :src="product.image ? product.image : 'https://via.placeholder.com/150'" alt="Product Image" class="product-image" />
+        <div class="product-info">
+          <h3 class="product-title">Title: {{ product.title }}</h3>
+          <p class="product-content">Content: {{ product.content }}</p>
+          <p class="product-category">Category: {{ product.category }}</p>
+          <button class="edit-button" @click="editBlog(product.id)">แก้ไข Blog</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
 
-
-
 <script>
-import BlogsService from '@/services/BlogsService';
+import BlogsService from '@/services/BlogsService'; // ตรวจสอบให้แน่ใจว่า BlogsService ถูกกำหนดไว้แล้ว
 
 export default {
   data() {
     return {
-      products: []
+      BASE_URL: "http://localhost:8081/assets/uploads/",
+      blogs: [], // ข้อมูลบล็อก
+      products: [] // ข้อมูลผลิตภัณฑ์
     };
   },
   created() {
-    this.fetchProducts();
+    this.fetchBlogs(); // เรียกใช้ฟังก์ชันดึงข้อมูลบล็อกเมื่อโหลดคอมโพเนนต์
+    this.fetchProducts(); // เรียกใช้ฟังก์ชันดึงข้อมูลผลิตภัณฑ์
   },
   methods: {
+    // ฟังก์ชันสำหรับดึงข้อมูลบล็อก
+    fetchBlogs() {
+      BlogsService.index()
+        .then(response => {
+          this.blogs = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching blogs:', error);
+        });
+    },
+    // ฟังก์ชันสำหรับดึงข้อมูลผลิตภัณฑ์
     fetchProducts() {
       BlogsService.index()
         .then(response => {
@@ -48,12 +88,18 @@ export default {
           console.error('Error fetching products:', error);
         });
     },
+    // ฟังก์ชันนำทางไปยังหน้าบล็อกโดยใช้ blogId
+    navigateToBlog(blogId) {
+      this.$router.push(`/blog/${blogId}`);
+    },
+    // ฟังก์ชันสำหรับแก้ไขบล็อก
     editBlog(blogId) {
       this.$router.push({ name: 'blog-edit', params: { blogId: blogId } });
     }
   }
 };
 </script>
+
 
 <style scoped>
 .blog-list {

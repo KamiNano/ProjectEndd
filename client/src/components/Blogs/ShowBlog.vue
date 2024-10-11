@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="show-blog-container">
     <!-- <h1 class="show-blog-title">Show Blog</h1> -->
     <div class="show-blog-content">
@@ -19,7 +18,7 @@
           
         </div>
       </div>
-=======
+    </div>
     <div>
         <h1>Show Blog</h1>
         <p>id: {{ blog.id }}</p>
@@ -36,20 +35,18 @@
             <button v-on:click="navigateTo('/blog/edit/'+ blog.id)">แก้ไข blog</button>
             <button v-on:click="navigateTo('/blogs')">กลับ </button>
         </p>
->>>>>>> 56b6798210aa469681a98c8c82925aaba9ea98f3
+
     </div>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
 import BlogsService from '@/services/BlogsService';
-
 export default {
   data() {
     return {
       blog: {},
-      BASE_URL: 'http://localhost:8081/assets/uploads/',
+      BASE_URL: 'http://localhost:8080/assets/uploads/',
     };
   },
   async created() {
@@ -58,29 +55,6 @@ export default {
       this.blog = (await BlogsService.show(blogId)).data;
     } catch (error) {
       console.log(error);
-=======
-    import BlogsService from '@/services/BlogsService'
-    export default {
-        data () {
-            return {
-                blog: null,
-                BASE_URL: "http://localhost:8081/assets/uploads/"
-            }
-        },
-        async created () {
-            try {
-                let blogId = this.$route.params.blogId
-                this.blog = (await BlogsService.show(blogId)).data
-            } catch (error) {
-                console.log (error)
-            }
-        },
-        methods : {
-            navigateTo (route) {
-                this.$router.push(route)
-            },
-        }
->>>>>>> 56b6798210aa469681a98c8c82925aaba9ea98f3
     }
   },
   computed: {
@@ -119,7 +93,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .show-blog-container {
   display: flex;
   justify-content: center;
@@ -192,6 +165,4 @@ export default {
   margin-right: 20px;
   border-radius: 10px;
 }
-=======
->>>>>>> 56b6798210aa469681a98c8c82925aaba9ea98f3
 </style>
